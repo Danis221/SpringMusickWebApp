@@ -14,7 +14,7 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 tasks.jar {
     enabled = false
     manifest {
-        attributes["Main-Class"] = "ru.itis.mv"
+        attributes["Main-Class"] = "ru.itis.mv.MusicKitWevAppSpringApplication"
     }
 }
 configurations {
