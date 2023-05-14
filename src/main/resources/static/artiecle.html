@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <meta charset="UTF-8">
+    <div class="header">
+        <a href="/" class="logo">
+            <img alt="What kinda music" src="../img/logo.jpg"
+                 width=45" height="20">
+        </a>
+        <div class="header-right">
+            <a class="active" href="/">Home</a>
+            <a href="/articles.html">Articles</a>
+            <a href="/events.html">Events</a>
+            <a href="/forum.html">Forum</a>
+            <a class="active" href="../about.html">About site</a>
+            <a href="/profile.html">Profile</a>
+            <a href="/chat.html">Chat</a>
+        </div>
+    </div>
+    <title>Articles</title>
+    <link rel="stylesheet" href="css/article.css">
+</head>
+<body>
+
+<div class="article">
+    <h1 id="article-name"></h1>
+    <p>created by <span id="article-user-login"></span></p>
+    <p>genre: <span id="article-genre"></span></p>
+
+    <div class="bar-line">
+        <div class="bar-line__left">
+            <iframe width="640" height="360" id="article-youtube-video"></iframe>
+        </div>
+
+        <div class="bar-line__right">
+            <div class="bar-line__right-text" id="article-text"></div>
+        </div>
+    </div>
+</div>
+
+<script src="path/to/jquery.js"></script>
+<script>
+    $(document).ready(function() {
+        // Replace the placeholders with actual values
+        var article = {
+            name: "Article Name",
+            userLogin: "User Login",
+            genre: "Article Genre",
+            videoFromYouTube: "https://www.youtube.com/embed/VIDEO_ID",
+            text: "Article Text"
+        };
+        $("#article-name").text(article.name);
+        $("#article-user-login").text(article.userLogin);
+        $("#article-genre").text(article.genre);
+        $("#article-youtube-video").attr("src", article.videoFromYouTube);
+        $("#article-text").html(article.text);
+    });
+</script>
+</body>
+</html>

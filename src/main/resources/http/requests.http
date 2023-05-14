@@ -1,0 +1,144 @@
+POST http://localhost:8080/api/create/article
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbHEycS5jb20iLCJleHAiOjE2ODM4MzU1NTEsInJvbGVzIjpbXSwiZmlyc3ROYW1lIjoiZGFuaXMifQ.W7QXqxc5HcWxqCnT7K_qbNCMBhebrMf1WBEQ4JNr4E8
+
+
+{
+  "name": "asf",
+  "videoFromYoutube": "asfssaf",
+  "content": "asfasf",
+  "genre": "asfasf"
+}
+
+###
+POST http://localhost:8080/api/create/forum
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbHEycS5jb20iLCJleHAiOjE2ODM4NTg0NzYsInJvbGVzIjpbXSwiZmlyc3ROYW1lIjoiZGFuaXMifQ.xahSQYuhqUG2yEZqqdlP6gvOlPmaTzqP2VT4OQXad1I
+
+{
+  "forumHeader": "test"
+}
+
+###
+
+GET  http://localhost:8080/api/articles
+
+
+###
+
+GET  http://localhost:8080/articles?page=1&genre=string
+
+###
+
+PATCH   http://localhost:8080/update/article/3
+Content-Type: application/json
+
+{
+  "name": "string",
+  "videoFromYoutube": "string",
+  "content": "string",
+  "genre": "string"
+}
+
+###
+
+GET http://localhost:8080/articles
+
+
+###
+
+#GET http://localhost:8080/api/events?price=100
+GET http://localhost:8080/api/events?page=1
+###
+
+POST  http://localhost:8080/api/create/event
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbHEycS5jb20iLCJleHAiOjE2ODM1NzgxNTgsInJvbGVzIjpbXSwiZmlyc3ROYW1lIjoiZGFuaXMifQ.0oXTMfqb8MqiaJ1fRsKiShX0Ia0gTFWOf_sCgEf_CKc
+
+{
+  "performer": "afasa",
+  "concertDate": "2023-05-15",
+  "price": 50,
+  "venue": "Theater Hall",
+  "organizersEmails":  ["email@emailq2q.com","q1345"]
+}
+
+
+
+###
+
+POST http://localhost:8080/api/create/user
+Content-Type: application/json
+
+{
+  "firstName": "aa",
+  "lastName": "asafas",
+  "email": "asfaqrws",
+  "password": "asfasfasfahj2hjkasfsaf"
+}
+
+###
+POST http://localhost:8080/create/post
+Content-Type: application/json
+
+{
+  "content": "test1123",
+  "forumId": 1
+}
+
+###
+GET http://localhost:8080/api/forums?page=0
+
+
+
+
+
+###
+POST http://localhost:8080/api/sig_up
+Content-Type: application/json
+
+{
+  "name": "email@example.com",
+  "email": "email@example.com",
+  "password": "password"
+}
+
+###
+
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "email@emailq2q.com",
+  "password": "asdsda"
+}
+
+###
+
+POST http://localhost:8080/api/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbHEycS5jb20iLCJleHAiOjE2ODM4MzM3MTUsInJvbGVzIjpbXSwiZmlyc3ROYW1lIjoiZGFuaXMifQ.7AeFXmt9vMtRp3JL6TOoxmLsoZjdqi_2IwUFaVcnLkg
+###
+GET http://localhost:8080/api/article/4
+
+###
+
+GET http://localhost:8080/api/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbHEycS5jb20iLCJleHAiOjE2ODM4MzM3MTUsInJvbGVzIjpbXSwiZmlyc3ROYW1lIjoiZGFuaXMifQ.7AeFXmt9vMtRp3JL6TOoxmLsoZjdqi_2IwUFaVcnLkg
+###
+
+GET http://localhost:8080/api/ajax/bts
+
+
+###
+
+POST http://localhost:8080/api/create/post
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbHEycS5jb20iLCJleHAiOjE2ODM4NTYwNzcsInJvbGVzIjpbXSwiZmlyc3ROYW1lIjoiZGFuaXMifQ._I_IEIU3RM6JajopovPgBToDvfmsdgmYDS2_UUEm_ZE
+
+{
+  "content": "test1123",
+  "forumId": 1
+}
+
+###
+GET http://localhost:8080/api/forums/1/discussion?page=0

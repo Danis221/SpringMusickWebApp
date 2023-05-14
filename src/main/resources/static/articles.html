@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles</title>
+    <link rel="stylesheet" href="css/article.css">
+    <script>
+        let btn = document.querySelector('.btn')
+
+
+
+        function scroll() {
+            if (window.pageYOffset > 20) {
+                btn.style.opacity = '1'
+            } else {
+                btn.style.opacity = '0'
+            }
+        }
+
+        btn.onclick = function() {
+            window.scrollTo(0, 0)
+        }
+
+        window.onscroll = scroll
+
+    </script>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <script defer src="../js/header.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <meta charset="UTF-8">
+    <div class="header">
+        <a href="/" class="logo">
+            <img alt="What kinda music" src="../img/logo.jpg"
+                 width=45" height="20">
+        </a>
+        <div class="header-right">
+            <a class="active" href="/">Home</a>
+            <a href="/articles.html">Articles</a>
+            <a href="/events.html">Events</a>
+            <a href="/forum.html">Forum</a>
+            <a class="active" href="../about.html">About site</a>
+            <a href="/profile.html">Profile</a>
+            <a href="/chat.html">Chat</a>
+        </div>
+    </div>
+</head>
+<body>
+<div id="articles"></div>
+
+<span class="btn"><a>To top </a></span>
+<script>
+    const articlesContainer = document.querySelector("#articles");
+    const genreFilter = document.querySelector("#genreFilter");
+
+    function renderArticles(articles) {
+        articlesContainer.innerHTML = "";
+        articles.forEach(article => {
+            const { name, authorEmail, content, videoFromYoutube, genre, created } = article;
+            const articleHTML = `
+          <div class="article">
+            <a href="#">
+              <h1>${name}</h1>
+            </a>
+            <br>
+            created by ${authorEmail} <br>
+            genre: ${genre}
+            <div class="bar-line">
+              <div class="bar-line__left">
+                <iframe width="640" height="360" src="${videoFromYoutube}"></iframe>
+              </div>
+              <div class="bar-line__right">
+                <div class="bar-line__right-text">${content}</div>
+              </div>
+            </div>
+          </div>
+        `;
+            articlesContainer.insertAdjacentHTML('beforeend', articleHTML);
+        });
+    }
+
+    async function fetchArticles() {
+        const response = await fetch("http://localhost:8080/api/articles");
+        const data = await response.json();
+        const { articles } = data;
+        renderArticles(articles);
+    }
+
+    fetchArticles();
+</script>
+</body>
+</html>

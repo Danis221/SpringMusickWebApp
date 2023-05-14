@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <meta charset="UTF-8"/>
+    <div class="header">
+        <a href="/" class="logo">
+            <img alt="What kinda music" src="../img/logo.jpg"
+                 width=45" height="20">
+        </a>
+        <div class="header-right">
+            <a class="active" href="/">Home</a>
+            <a href="/articles.html">Articles</a>
+            <a href="/events.html">Events</a>
+            <a href="/forum.html">Forum</a>
+            <a class="active" href="../about.html">About site</a>
+            <a href="/profile.html">Profile</a>
+            <a href="/chat.html">Chat</a>
+        </div>
+    </div>
+    <link rel="stylesheet" href="css/profile.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+<h1>Kak ze ia lublu BTS, vot oni sleva napravo: Nadjyn, Chonguk, Chingachkyk, Goiko Mitch, Djin, Uingi. Love </h1>
+
+
+<!--<div style="float: right;">-->
+<!--    <h1>-->
+<!--        <div id="ajax-div">-->
+<!--            test-->
+<!--        </div>-->
+<!--    </h1>-->
+
+<!--    <form>-->
+<!--        <input type="button" id="ajax-button" value="Which BTS Member Are You?">-->
+<!--    </form>-->
+<!--</div>-->
+
+<div class="infoOfUser">
+    <p>Полное имя: <span id="fullName"></span></p>
+    <p>Email: <span id="email"></span></p>
+</div>
+
+<div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+       aria-expanded="false">
+        Settings
+    </a>
+
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <!--        <li><a href="/updateProfile" id="updateProfile">update Profile</a></li>-->
+        <li><a style="color:red;" href="/logout" id="logout">Logout</a></li>
+    </ul>
+</div>
+
+
+<script>
+
+    const token = localStorage.getItem('jwtAccessToken');
+
+    if (token) {
+        const headers = {
+            'Authorization': `Bearer ${token}`
+        };
+
+        fetch('http://localhost:8080/api/user/profile', {headers})
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('fullName').textContent = data.fullName;
+                document.getElementById('email').textContent = data.email;
+            })
+            .catch(error => {
+                console.error('Ошибка при получении профиля пользователя:', error);
+            });
+    } else {
+        console.error('JWT-токен не найден в localStorage');
+        window.location.href = '/auth.html';
+    }
+
+    const logoutLink = document.getElementById("logout");
+
+    logoutLink.addEventListener("click", ev => {
+        ev.preventDefault()
+
+        const token = localStorage.getItem('jwtAccessToken');
+
+        fetch("http://localhost:8080/api/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((response) => {
+                if (response.ok) {
+
+                    localStorage.clear();
+                    window.location.href = '/'
+                    console.log("Logged out successfully");
+                } else {
+                    console.error("Logout failed");
+                }
+            })
+            .catch((error) => {
+                console.error("Logout error:", error);
+            });
+    });
+</script>
+<div style="float: right;">
+
+    <button id="Bts">Which BTS Member Are You?!</button>
+    <h1>You</h1>
+   <h1> <div id="ajax-div"></div></h1>
+</div>
+<script>
+    document.getElementById("Bts").addEventListener("click", function () {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                var responseText = this.responseText;
+                document.getElementById("ajax-div").innerText = responseText;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/api/ajax/bts", true);
+        xhttp.send();
+    });
+</script>
+</body>
+</html>
+

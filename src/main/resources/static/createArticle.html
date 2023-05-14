@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <title>Create Article</title>
+    <link rel="stylesheet" href="css/createArticl.css">
+    <script  src="js/validatorForCreateArticle.js"></script>
+    <div class="header">
+        <a href="/" class="logo">
+            <img alt="What kinda music" src="../img/logo.jpg"
+                 width=45" height="20">
+        </a>
+        <div class="header-right">
+            <a class="active" href="/">Home</a>
+            <a href="/articles.html">Articles</a>
+            <a href="/events.html">Events</a>
+            <a href="/forum.html">Forum</a>
+            <a class="active" href="../about.html">About site</a>
+            <a href="/profile.html">Profile</a>
+            <a href="/chat.html">Chat</a>
+        </div>
+    </div>
+</head>
+<body>
+<h1>Create Article</h1>
+
+<form id="articleForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="videoFromYoutube">Video from YouTube:</label>
+    <input type="text" id="videoFromYoutube" name="videoFromYoutube"
+           value="https://www.youtube.com/embed/dQw4w9WgXcQ"><br><br>
+
+    <label for="content">Content:</label><br>
+    <textarea id="content" name="content" required></textarea><br><br>
+
+    <label for="genre">Genre:</label>
+    <select name="genre" id="genre"><
+        <option value="rock">rock</option>
+        <option value="rap">rap</option>
+        <option value="indi">indi</option>
+        <option value="post-punck">post-punck</option>
+    </select><br>
+    <check></check>
+    <input  class="button" id="button" type="submit" value="Create">>
+</form>
+
+<script>
+    document.getElementById("articleForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var formData = {
+            "name": document.getElementById("name").value,
+            "videoFromYoutube": document.getElementById("videoFromYoutube").value,
+            "content": document.getElementById("content").value,
+            "genre": document.getElementById("genre").value
+        };
+
+        const token = localStorage.getItem('jwtAccessToken');
+
+        if(!token) {
+            window.location.href = '/auth.html'
+        }
+
+        fetch("http://localhost:8080/api/create/article", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert("win")
+                console.log(data);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+    });
+</script>
+</body>
+</html>

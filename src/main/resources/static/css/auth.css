@@ -1,0 +1,21 @@
+form {
+    padding: 20px;
+    background-color: white;
+    position: fixed; top: 50%; left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+}
+body {
+    background-size: revert;
+    background-position: center center;
+    background-attachment: fixed;
+    background-image: url("../img/t.jpg");
+    background-color: white;
+}
+
+h1{
+    color: white;
+}
+
+input, label{
+    display:block;
+}

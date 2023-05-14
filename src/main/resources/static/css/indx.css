@@ -1,0 +1,27 @@
+body{
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-image: url("../img/shit.jpg");
+    background-color: white;
+}
+
+.text {
+    font-size:66px;
+    font-weight: bold;
+    font-family: arial;
+    display: inline-block;
+    position: relative;
+    background: -webkit-linear-gradient(#eee, #04040f);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.name{
+    margin-left: 100px;
+    background: -webkit-linear-gradient(#f1bd23, #335e37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+

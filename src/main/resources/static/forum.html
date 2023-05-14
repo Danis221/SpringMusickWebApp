@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forum</title>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <div class="header">
+        <a href="/" class="logo">
+            <img alt="What kinda music" src="../img/logo.jpg"
+                 width=45" height="20">
+        </a>
+        <div class="header-right">
+            <a class="active" href="/">Home</a>
+            <a href="/articles.html">Articles</a>
+            <a href="/events.html">Events</a>
+            <a href="/forum.html">Forum</a>
+            <a class="active" href="../about.html">About site</a>
+            <a href="/profile.html">Profile</a>
+            <a href="/chat.html">Chat</a>
+        </div>
+    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        ul#forums-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul#forums-list li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        ul#forums-list li h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        ul#forums-list li p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        div#pagination {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        p#current-page,
+        p#total-pages {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<h1>Forum</h1>
+
+<form id="create-forum-form">
+    <label for="forum-header">Forum Header:</label>
+    <input type="text" id="forum-header" name="forumHeader" required>
+
+    <button type="submit">Create Forum</button>
+</form>
+
+
+<ul id="forums-list"></ul>
+
+<div id="pagination">
+    <button id="prev-page">Prev</button>
+    <button id="next-page">Next</button>
+</div>
+
+<p id="current-page"></p>
+<p id="total-pages"></p>
+
+<script>
+    let currentPage = 0;
+    const forumsList = document.getElementById('forums-list');
+    const prevPageButton = document.getElementById('prev-page');
+    const nextPageButton = document.getElementById('next-page');
+    const currentPageLabel = document.getElementById('current-page');
+    const totalPagesLabel = document.getElementById('total-pages');
+
+    function fetchForums(page) {
+
+
+        const token = localStorage.getItem('jwtAccessToken');
+
+        if(!token) {
+            window.location.href = '/auth.html'
+        }
+        fetch(`http://localhost:8080/api/forums?page=${page}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                forumsList.innerHTML = '';
+                data.forums.forEach(forum => {
+                    const listItem = document.createElement('li');
+                    const forumHeader = document.createElement('h2');
+                    const forumId = document.createElement('p');
+                    const created = document.createElement('p');
+                    const authorEmail = document.createElement('p');
+                    const postsId = document.createElement('p');
+
+                    const forumLink = document.createElement('a');
+                    forumLink.href = `forums/1/discussion?page=0${forum.id}`;
+
+                    forumLink.textContent = forum.forumHeader;
+                    forumId.textContent = 'ID: ' + forum.id;
+                    created.textContent = 'Date: ' + forum.created;
+                    authorEmail.textContent = 'author: ' + forum.authorEmail;
+                    postsId.textContent = 'posts: ' + forum.postsId;
+
+                    forumHeader.appendChild(forumLink);
+
+                    listItem.appendChild(forumHeader);
+                    listItem.appendChild(forumId);
+                    listItem.appendChild(created);
+                    listItem.appendChild(authorEmail);
+
+                    forumsList.appendChild(listItem);
+                });
+
+                currentPageLabel.textContent = 'Page: ' + (page + 1);
+                totalPagesLabel.textContent = 'Total Page: ' + data.totalPagesCount;
+
+                prevPageButton.disabled = page === 0;
+                nextPageButton.disabled = page === (data.totalPagesCount - 1);
+            })
+            .catch(error => {
+                console.log('Произошла ошибка:', error);
+            });
+    }
+
+    prevPageButton.addEventListener('click', () => {
+        currentPage--;
+        fetchForums(currentPage);
+    });
+
+    nextPageButton.addEventListener('click', () => {
+        currentPage++;
+        fetchForums(currentPage);
+    });
+    fetchForums(currentPage);
+
+
+</script>
+
+</body>
+</html>
