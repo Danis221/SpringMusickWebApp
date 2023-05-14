@@ -11,6 +11,12 @@ group = "ru.itis"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
+tasks.jar {
+    enabled = false
+    manifest {
+        attributes["Main-Class"] = "ru.itis.mv.MusicKitWevAppSpringApplication"
+    }
+}
 configurations {
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
