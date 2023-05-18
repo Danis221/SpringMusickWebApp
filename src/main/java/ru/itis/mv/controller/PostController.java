@@ -23,7 +23,7 @@ public class PostController {
     }
 
     @GetMapping("forums/{id}/discussion")
-    public PostPage getPosts(@PathVariable("id") int id, @RequestParam("page") int page) {
+    public PostPage getPosts(@PathVariable("id") int id, @RequestParam(value = "page", defaultValue = "0") int page) {
         return postService.getaAllPostsByForumId(page, id);
     }
 }

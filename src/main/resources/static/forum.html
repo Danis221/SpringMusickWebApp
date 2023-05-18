@@ -7,7 +7,7 @@
     <div class="header">
         <a href="/" class="logo">
             <img alt="What kinda music" src="../img/logo.jpg"
-                 width=45" height="20">
+                 width="45" height="20">
         </a>
         <div class="header-right">
             <a class="active" href="/">Home</a>
@@ -109,13 +109,12 @@
     const totalPagesLabel = document.getElementById('total-pages');
 
     function fetchForums(page) {
-
-
         const token = localStorage.getItem('jwtAccessToken');
 
-        if(!token) {
+        if (!token) {
             window.location.href = '/auth.html'
         }
+
         fetch(`http://localhost:8080/api/forums?page=${page}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -171,10 +170,43 @@
         currentPage++;
         fetchForums(currentPage);
     });
+
+    document.getElementById('create-forum-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const forumHeaderInput = document.getElementById('forum-header');
+        const forumHeader = forumHeaderInput.value.trim();
+
+        if (forumHeader !== '') {
+            const token = localStorage.getItem('jwtAccessToken');
+
+            if (!token) {
+                window.location.href = '/auth.html';
+            }
+
+            fetch('http://localhost:8080/api/create/forum', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ forumHeader: forumHeader })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        forumHeaderInput.value = '';
+    });
+
     fetchForums(currentPage);
-
-
 </script>
 
 </body>
 </html>
+

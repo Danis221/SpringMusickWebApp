@@ -10,6 +10,7 @@ import ru.itis.mv.service.AuthService;
 
 
 import javax.security.auth.message.AuthException;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/auth")
@@ -19,7 +20,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("login")
-    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest authRequest) throws AuthException {
+    public ResponseEntity<JwtResponse> login(@RequestBody @Valid JwtRequest authRequest) throws AuthException {
         final JwtResponse token = authService.login(authRequest);
         return ResponseEntity.ok(token);
     }

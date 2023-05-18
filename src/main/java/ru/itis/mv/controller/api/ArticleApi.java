@@ -88,21 +88,4 @@ public interface ArticleApi {
     @PatchMapping("/update/article/{article-id}")
     ResponseEntity<ArticleDto> updateLesson(@Parameter(description = "article id", example = "1") @PathVariable("article-id") Integer articleId,
                                             @RequestBody NewOrUpdateArticleDto updateArticle);
-
-
-//    @Operation(summary = "Getting articles by genre and page")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Articles page by genre and page",
-//                    content = {
-//                            @Content(mediaType = "application/json", schema = @Schema(implementation = ArticlePage.class))
-//                    }),
-//            @ApiResponse(responseCode = "404", description = "Error information",
-//                    content = {
-//                            @Content(mediaType = "application/json",
-//                                    schema = @Schema(implementation = ExceptionDto.class))
-//                    })
-//    })
-//    @GetMapping("/articles")
-//    ResponseEntity<ArticlePage> getArticlesByGenreAndPage(int page,
-//                                                        );
 }

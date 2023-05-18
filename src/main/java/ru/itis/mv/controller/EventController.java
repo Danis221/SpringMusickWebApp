@@ -11,6 +11,7 @@ import ru.itis.mv.dto.EventPage;
 import ru.itis.mv.dto.NewEventDto;
 import ru.itis.mv.service.EventService;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 
 
@@ -32,7 +33,7 @@ public class EventController {
     }
 
     @PostMapping("create/event")
-    public ResponseEntity<EventDto> create(@RequestBody NewEventDto newEvent) {
+    public ResponseEntity<EventDto> create(@RequestBody @Valid NewEventDto newEvent) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(eventService.create(newEvent));
     }

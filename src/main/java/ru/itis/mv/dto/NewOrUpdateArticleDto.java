@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.itis.mv.model.Article;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,10 +15,13 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Data
 public class NewOrUpdateArticleDto {
+    @NotEmpty(message = "the name must not be empty")
     private String name;
 
+    @NotEmpty(message = "the link must not be empty")
     private String videoFromYoutube;
 
+    @NotEmpty(message = "the content must not be empty")
     private String content;
 
     private String genre;

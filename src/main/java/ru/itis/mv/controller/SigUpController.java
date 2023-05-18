@@ -11,6 +11,8 @@ import ru.itis.mv.dto.CreateUserRequestDto;
 import ru.itis.mv.dto.UserResponseDto;
 import ru.itis.mv.service.UserService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/sig_up")
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class SigUpController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> signUp(@RequestBody CreateUserRequestDto newUser) {
+    public ResponseEntity<UserResponseDto> signUp(@RequestBody @Valid CreateUserRequestDto newUser) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userService.create(newUser));
     }

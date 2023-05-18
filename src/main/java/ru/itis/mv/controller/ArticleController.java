@@ -10,6 +10,7 @@ import ru.itis.mv.dto.ArticlePage;
 import ru.itis.mv.dto.NewOrUpdateArticleDto;
 import ru.itis.mv.service.ArticleService;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -36,13 +37,13 @@ public class ArticleController implements ArticleApi {
     }
 
     @Override
-    public ResponseEntity<ArticleDto> createArticle(NewOrUpdateArticleDto newArticleDro) {
+    public ResponseEntity<ArticleDto> createArticle(@Valid NewOrUpdateArticleDto newArticleDro) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(articleService.createArticle(newArticleDro));
     }
 
     @Override
-    public ResponseEntity<ArticleDto> updateLesson(Integer articleId, NewOrUpdateArticleDto updateArticle) {
+    public ResponseEntity<ArticleDto> updateLesson(Integer articleId,@Valid  NewOrUpdateArticleDto updateArticle) {
         return ResponseEntity.accepted()
                 .body(articleService.updateArticle(articleId, updateArticle));
     }

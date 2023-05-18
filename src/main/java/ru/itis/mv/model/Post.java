@@ -18,7 +18,8 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition="text")
+    @Lob
     private String content;
 
     @ManyToOne

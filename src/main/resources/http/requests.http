@@ -13,7 +13,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbHEycS5jb20iL
 ###
 POST http://localhost:8080/api/create/forum
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbHEycS5jb20iLCJleHAiOjE2ODM4NTg0NzYsInJvbGVzIjpbXSwiZmlyc3ROYW1lIjoiZGFuaXMifQ.xahSQYuhqUG2yEZqqdlP6gvOlPmaTzqP2VT4OQXad1I
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBleGFtcGxlLmNvbSIsImV4cCI6MTY4NDEwNTQ0MSwicm9sZXMiOltdLCJmaXJzdE5hbWUiOiJlbWFpbEBleGFtcGxlLmNvbSJ9.cdNbBSGCD1DkNAOhtDp8J9f8TAXtVUGx6lMbkjCD6Bs
 
 {
   "forumHeader": "test"
@@ -109,8 +109,8 @@ POST http://localhost:8080/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "email@emailq2q.com",
-  "password": "asdsda"
+  "email": "email@example.com",
+  "password": "password"
 }
 
 ###
@@ -133,12 +133,12 @@ GET http://localhost:8080/api/ajax/bts
 
 POST http://localhost:8080/api/create/post
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBlbWFpbHEycS5jb20iLCJleHAiOjE2ODM4NTYwNzcsInJvbGVzIjpbXSwiZmlyc3ROYW1lIjoiZGFuaXMifQ._I_IEIU3RM6JajopovPgBToDvfmsdgmYDS2_UUEm_ZE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBleGFtcGxlLmNvbSIsImV4cCI6MTY4NDEwNjM5MCwicm9sZXMiOltdLCJmaXJzdE5hbWUiOiJlbWFpbEBleGFtcGxlLmNvbSJ9.8gXfqBrEkgBSP9mgZ_WcP3Lj77C5D7lbBmQZaZkxPnk
 
 {
   "content": "test1123",
-  "forumId": 1
+  "forumId": 2
 }
 
 ###
-GET http://localhost:8080/api/forums/1/discussion?page=0
+GET http://localhost:8080/api/forums/1/discussion

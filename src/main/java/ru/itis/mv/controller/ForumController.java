@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.itis.mv.dto.*;
 import ru.itis.mv.service.ForumService;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RequestMapping("api")
 @RestController
@@ -22,7 +24,7 @@ public class ForumController {
     }
 
     @PostMapping("/create/forum")
-    public ResponseEntity<ForumDto> create(@RequestBody NewForumDto newForum) {
+    public ResponseEntity<ForumDto> create(@RequestBody @Valid NewForumDto newForum) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(forumService.create(newForum));
     }
